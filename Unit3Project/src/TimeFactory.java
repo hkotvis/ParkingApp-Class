@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 /**
  * Time Factory
@@ -12,9 +11,9 @@ import java.util.Random;
  * @version 2.0
  */
 public class TimeFactory {
-    ArrayList<String> tickets = new ArrayList<>();
 
     Random rand = new Random();
+//    MinMaxFeeCalc m = new MinMaxFeeCalc();
     int timeIn= rand.nextInt(6) + 7;  // Obtain a number between [7 - 12].
     int timeOut= rand.nextInt(11) + 1; //  obtain num between 1 and 11
     int hours; // number of hours parked
@@ -43,32 +42,22 @@ public class TimeFactory {
         hours = (12 - timeIn) + timeOut;
         return hours;
     }
+    public int getCharge() throws IOException{
+        int charge = 0;
+        int hours = getHours();
 
-    /**
-     * Method toArray
-     * This method adds the three variables (timeIn, timeOut, hours) to the tickets array on check in.
-     * @throws IOException
-     */
-    public void toArray() throws IOException {
-        tickets.add(Integer.toString(getTimeIn()));
-        tickets.add(Integer.toString(getTimeOut()));
-        tickets.add(Integer.toString(getHours()));
-        FileIO fio = new FileIO();
-        fio.write(tickets);
+        if(hours <= 3){
+            charge = 5;
+        }
+        else if (hours > 3 && hours < 13){
+            charge = (hours - 3) + 5;
+        }
+        else{
+            charge = 15;
+        }
+        return charge;
     }
 
-    public void toCheckIn() throws IOException{
-        tickets.add(Integer.toString(getTimeIn()));
-        tickets.add("0"); //unknown time out
-        tickets.add("0"); //unknown hours
-        tickets.add("C");
-        FileIO fio = new FileIO();
-        fio.write(tickets);
-    }
-    public void toSpecialEvent() throws IOException{
-        tickets.add("S");
-        FileIO fio = new FileIO();
-        fio.write(tickets);
-    }
+
 
 }

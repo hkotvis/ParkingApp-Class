@@ -12,8 +12,9 @@ import java.io.IOException;
  */
 //Strategy
 public class MinMaxFeeCalc {
-    FileIO tf = new FileIO();
-    double charge = 0;
+    TimeFactory tf = new TimeFactory();
+    FileIO fio = new FileIO();
+   // int charge = 0;
 
     /**
      * MinMaxFeeCalc method
@@ -24,25 +25,22 @@ public class MinMaxFeeCalc {
 
         //c.displayCharge(charge);
    // }
-    public double getCharge() throws IOException{
-        CheckOut c;
-        String number = tf.getHrs();
-        int result = Integer.parseInt(number);
-        if(result <= 3){
+    public int getCharge() throws IOException{
+        ToArray ta = new ToArray();
+        int charge = 0;
+        int hours = Integer.parseInt(ta.hours);
+
+        if(hours <= 3){
             charge = 5;
             //System.out.println("$5.00");
             //checkIns.add(5);
         }
-        else if (result > 3 && result < 13){
-            int pay = (result - 3) + 5;
-            //System.out.println("$" + pay +".00");
-            charge = pay;
-            // checkIns.add(pay);
+        else if (hours > 3 && hours < 13){
+            charge = (hours - 3) + 5;
+
         }
         else{
             charge = 15;
-            //System.out.println("$15.00");
-            //checkIns.add(15);
         }
         return charge;
     }

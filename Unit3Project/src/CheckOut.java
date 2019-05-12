@@ -14,27 +14,29 @@ public class CheckOut implements Garage {
     FileIO fio = new FileIO();
     LostTicketFeeCalc l = new LostTicketFeeCalc();
     SpecialEventFeeCalc s = new SpecialEventFeeCalc();
-
+    ToArray ta = new ToArray();
 
     @Override
     public void displayCharge() throws IOException {
-        //find id
-        //double vharge = charge;
         checkOut.receipt();
     }
         @Override
     public void displayScreen() throws IOException {
         checkOut.checkOutOptions();
         switch (in.nextLine()){
-            case "1": checkOut.receiptChoice();
-            displayCharge();
+            case "1":   ta.toCheckOut(); //displayCharge();
             break;
             case "2": double charge = s.charge;
                     checkOut.specialEvent(charge);
+                    ta.toSpecialEvent();
                 break;
             case "3": charge = l.charge;
                 checkOut.lostTicket(charge);
+                //fio.lost();
+                ta.toLostTix();
                 break;
+            case "4": checkOut.closeGarage(s.charge, l.charge);
+            break;
                 default:
                     System.out.println("Please enter a valid number");
                     checkOut.checkOutOptions();

@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class FileIO {
     // TimeFactory tf = new TimeFactory();
-    ArrayList<String> tickets = new ArrayList<>();
+    //ArrayList<String> tickets = new ArrayList<>();
     String file = "Unit3Project/parking.txt";
 
     public void write(ArrayList tickets) throws IOException {
@@ -118,24 +118,6 @@ public class FileIO {
         return time;
     }
 
-    public String findId(String id) throws IOException{
-        Scanner scanner = new Scanner(new File(file));
-        scanner.useDelimiter(" ");
-        String found = null;
-        while(scanner.hasNextLine()){
-
-        }
-        if(scanner.hasNextLine()){
-            scanner.next();
-            scanner.next();
-            scanner.next();
-            id = scanner.next();
-            scanner.nextLine();
-        }
-        scanner.close();
-        return id;
-
-    }
     public String getOut() throws IOException{
         Scanner scanner = new Scanner(new File(file));
         scanner.useDelimiter(" ");
@@ -163,8 +145,65 @@ public class FileIO {
         scanner.close();
         return time;
     }
+    public String getCash() throws IOException{
+        Scanner scanner = new Scanner(new File(file));
+        scanner.useDelimiter(" ");
+        String cash = "";
+        if(scanner.hasNextLine()){
+            scanner.next();
+            scanner.next();
+            scanner.next();
+            cash = scanner.next();
 
+            scanner.nextLine();
+        }
+        scanner.close();
+        return cash;
+    }
 
+    public int getTotal() throws IOException{
+        int cash = 0;
+        String add="";
+        String substring ="";
 
+                    Scanner scanner = new Scanner(new File(file));
+                    int sub2 = 0;
+        int newNum = 0;
+                    while(scanner.hasNextLine()){
+                        add = scanner.nextLine();
+                        //System.out.println(add);
+                       if(add.contains(" C")){
+                           int iend = add.indexOf("C");
+                           int other = iend - 3;
+
+                           if(iend != -1){
+                               substring =add.substring((other), iend).trim();
+                               sub2 = Integer.parseInt(substring);
+                               //sub2 += sub2;
+                           }
+                           //System.out.println(add.substring(add.indexOf("C") - 3));
+
+                           newNum +=sub2;
+                          // System.out.println(iend);
+                           //System.out.println(other);
+                          // System.out.println(newNum);
+                          // System.out.println(substring);
+
+                            //cash += (scanner.nextInt());
+
+                        }
+
+                       else{
+                           //System.out.println("Does not contain");
+                           // add = scanner.nextLine();
+                           // System.out.println(add);
+                            //
+                           // System.out.println("does not contain c");
+                        }
+                    }
+                    cash = newNum;
+
+        return cash;
+    }
 
 }

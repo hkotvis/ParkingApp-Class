@@ -9,16 +9,17 @@ import java.util.Scanner;
 public class CheckIn implements Garage{
 Scanner in = new Scanner (System.in);
 TimeFactory tf = new TimeFactory();
+ToArray ta = new ToArray();
 
     Screens checkIn = new Screens();
     public void displayScreen() throws IOException {
         checkIn.checkInOptions();
         switch (in.nextLine()){
-            case "1": tf.toArray(); checkIn.printTicket();
+            case "1":  checkIn.printTicket(); //ta.toCheckIn();
             break;
-            case "2": checkIn.printTicket();
+            case "2": checkIn.printTicket(); //ta.toSpecialEvent();
             break;
-            default: checkIn.closeGarage();
+            //default: checkIn.closeGarage();
         }
 
 
