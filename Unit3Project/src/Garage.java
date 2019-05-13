@@ -6,6 +6,14 @@ import java.io.IOException;
  *  * @version 2.0
  */
 public interface Garage {
+    /**
+     * @throws IOException
+     */
     void displayCharge() throws IOException;
-    void displayScreen() throws IOException;
+
+    /**
+     * @return boolean (for looping purposes)
+     * @throws IOException
+     */
+    boolean displayScreen() throws IOException;
 }

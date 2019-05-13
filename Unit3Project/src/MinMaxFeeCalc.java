@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 /**
- * MinMaxFeeCalc class
+ * MinMaxFeeCalc class implements CalcStrategy
  * This class is our calculator and extends the CheckOut class.
  * Creates an instance of our TimeFactory.
  * The variable charge is a double and represents how much money the person leaving the garage owes.
@@ -10,30 +10,30 @@ import java.io.IOException;
  * @author Hailey Kotvis
  * @version 2.0
  */
-//Strategy
-public class MinMaxFeeCalc {
+public class MinMaxFeeCalc implements CalcStrategy{
+    ToArray ta = new ToArray();
+    FileOutput fo = new FileOutput();
     TimeFactory tf = new TimeFactory();
-    FileIO fio = new FileIO();
-   // int charge = 0;
 
     /**
-     * MinMaxFeeCalc method
-     * Uses the hours from TimeFactory to calculate charge.
-     * @return double charge which is a double and represents how much money the person leaving the garage owes.
+     * Constructor
+     * @throws IOException
      */
-    //public void MinMaxFeeCalc() throws IOException {
+    public MinMaxFeeCalc() throws IOException {}
 
-        //c.displayCharge(charge);
-   // }
-    public int getCharge() throws IOException{
-        ToArray ta = new ToArray();
-        int charge = 0;
-        int hours = Integer.parseInt(ta.hours);
+
+    /**
+     *Calculates how much someone owes
+     * @return double charge which is how much to charge someone based on hours parked
+     * @throws IOException
+     */
+    @Override
+    public double calculate() throws IOException {
+        double charge = 0;
+        int hours = (tf.getTimeHours());
 
         if(hours <= 3){
             charge = 5;
-            //System.out.println("$5.00");
-            //checkIns.add(5);
         }
         else if (hours > 3 && hours < 13){
             charge = (hours - 3) + 5;
@@ -44,6 +44,4 @@ public class MinMaxFeeCalc {
         }
         return charge;
     }
-
-
 }

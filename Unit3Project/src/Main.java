@@ -12,20 +12,24 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-Scanner in = new Scanner(System.in);
-
-            System.out.println("Do you want to enter or exit the parking garage?");
+        Scanner in = new Scanner(System.in);
+        boolean flag = false;
+        while (flag == false) {
+            System.out.println("\nDo you want to enter or exit the parking garage?");
             System.out.println("1 - Enter");
             System.out.println("2 - Exit ");
-            if(in.nextLine().equals("1")){
-                CheckIn c = new CheckIn();
-                c.displayScreen();
+            String choice = in.nextLine();
+            if (choice.equals("1")) {
+                ChooseMachine.choose(ChooseMachine.MeasurementSystem.CHECKIN);
+            } else if (choice.equals("2")) {
+                flag = ChooseMachine.choose(ChooseMachine.MeasurementSystem.CHECKOUT);
+
             }
-            else {
-                CheckOut o = new CheckOut();
-                o.displayScreen();
-                //o.displayCharge();
+            else{
+                System.out.println("Please enter a 1 or 2");
+                flag = false;
             }
+        }
     }
 }
 

@@ -8,31 +8,46 @@ import java.io.IOException;
  * @version 2.0
  */
 public class Screens{
-    FileIO fio = new FileIO();
-    TimeFactory tf = new TimeFactory();
+    FileOutput fo = new FileOutput();
     MinMaxFeeCalc m = new MinMaxFeeCalc();
     ToArray ta = new ToArray();
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
+    public Screens() throws IOException {}
+
+    public void error(){
+        System.out.println("Please enter a valid option");
+    }
     public void checkInOptions(){
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
         System.out.println("1 - Check In");
         System.out.println("2 - Special Event");
-        //System.out.println("3 - Close Garage");
+        System.out.print("=>  ");
     }
-    public void printTicket() throws IOException {
+    public void printTicket() {
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
         System.out.println("Place this ticket on your dashboard, you will need it to check out of the garage!");
     }
+
+    /**
+     * Brings in charges for special events and lost tickets
+     * @param specialCharge
+     * @param lostCharge
+     * @throws IOException
+     */
     public void closeGarage(double specialCharge, double lostCharge) throws IOException {
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
         System.out.println("Activity to Date");
-        System.out.println("\n$"+ fio.getTotal() +".00 was collected from " + fio.getNumOfCheckIns() + " check ins");
-        System.out.println("$" + (fio.getNumOfSpecialEvents() * specialCharge) + "0 was collected from " + fio.getNumOfSpecialEvents() + " special events");
-        System.out.println("$"+ (fio.getNumOfLostTix() * lostCharge)+ "0 was collected from " + fio.getNumOfLostTix()+ " lost tickets");
-        System.out.println("\n$"+((fio.getNumOfLostTix() * lostCharge)+(fio.getNumOfSpecialEvents() * specialCharge) + fio.getTotal()) +"0 was collected overall");
+        System.out.println("\n$"+ fo.getTotal() +".00 was collected from " + fo.getNumOfCheckIns() + " check ins");
+        System.out.println("$" + (fo.getNumOfSpecialEvents() * specialCharge) + "0 was collected from " + fo.getNumOfSpecialEvents() + " special events");
+        System.out.println("$"+ (fo.getNumOfLostTix() * lostCharge)+ "0 was collected from " + fo.getNumOfLostTix()+ " lost tickets");
+        System.out.println("\n$"+((fo.getNumOfLostTix() * lostCharge)+(fo.getNumOfSpecialEvents() * specialCharge) + fo.getTotal()) +"0 was collected overall");
 
     }
 
@@ -43,25 +58,37 @@ public class Screens{
         System.out.println("2 - Special Event");
         System.out.println("3 - Lost Ticket");
         System.out.println("4 - Close Garage");
+        System.out.print("=>  ");
     }
 
-    public void receipt() throws IOException {
+    /**
+     * Brings in charge for calculation of hours parked
+     * @param charge
+     * @throws IOException
+     */
+    public void receipt(double charge) throws IOException {
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
-        System.out.println("Receipt for Vehicle ID");
-        System.out.println("\n"+ fio.getHrs() + " hours parked from " + fio.getIn() +" am - " + fio.getOut() + " pm");
-        System.out.println("$" + fio.getCash() +".00");
-
+        System.out.println("Receipt for Parked Vehicle");
+        System.out.println("\n"+ fo.getHrs() + " hours parked from " + fo.getIn() +" am - " + fo.getOut() + " pm");
+        System.out.println("$" + fo.getCash() +".00");
     }
+
+    /**
+     * Brings in charge for special events
+     * @param charge
+     */
     public void specialEvent(double charge){
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
         System.out.println("Special Event");
         System.out.println("$" + charge +"0");
-
     }
 
-
+    /**
+     * Brings in charge for lost ticket
+     * @param charge
+     */
     public void lostTicket(double charge) {
         System.out.println("\nBest Value Parking");
         System.out.println("--------------------");
